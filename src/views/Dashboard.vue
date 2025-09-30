@@ -286,14 +286,57 @@ export default {
 
     const loadAnalyticsData = async () => {
       try {
-        const response = await fetch('/data/analytics.json')
+        // Try multiple paths for production compatibility
+        let response
+        try {
+          response = await fetch('/data/analytics.json')
+        } catch {
+          response = await fetch('./data/analytics.json')
+        }
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        
         analyticsData.value = await response.json()
       } catch (error) {
         console.error('Failed to load analytics data:', error)
+        
+        // Fallback with sample data if fetch fails
+        analyticsData.value = {
+          dailyStats: {
+            revenue: 12450.75,
+            orders: 47,
+            customers: 23,
+            products: 156
+          },
+          monthlyRevenue: [
+            {"month": "Jan", "revenue": 125000, "orders": 450},
+            {"month": "Feb", "revenue": 145000, "orders": 523},
+            {"month": "Mar", "revenue": 135000, "orders": 489},
+            {"month": "Apr", "revenue": 155000, "orders": 567},
+            {"month": "Mei", "revenue": 175000, "orders": 634},
+            {"month": "Jun", "revenue": 165000, "orders": 598},
+            {"month": "Jul", "revenue": 185000, "orders": 672},
+            {"month": "Agu", "revenue": 195000, "orders": 701},
+            {"month": "Sep", "revenue": 205000, "orders": 734},
+            {"month": "Okt", "revenue": 215000, "orders": 789},
+            {"month": "Nov", "revenue": 225000, "orders": 823},
+            {"month": "Des", "revenue": 245000, "orders": 876}
+          ],
+          topProducts: [
+            {"productId": 3, "name": "Kabel Charger USB-C", "sales": 892, "revenue": 17838.08},
+            {"productId": 2, "name": "Case Handphone Pintar", "sales": 567, "revenue": 14165.33},
+            {"productId": 6, "name": "Mouse Nirkabel", "sales": 456, "revenue": 15954.44},
+            {"productId": 4, "name": "Power Bank Portabel", "sales": 345, "revenue": 17246.55},
+            {"productId": 7, "name": "Keyboard Mekanik", "sales": 267, "revenue": 42717.33}
+          ]
+        }
+        
         appStore.addNotification({
-          type: 'error',
-          title: 'Data Load Error',
-          message: 'Failed to load analytics data'
+          type: 'warning',
+          title: 'Menggunakan Data Sampel',
+          message: 'Menggunakan data sampel untuk demo'
         })
       }
     }
@@ -380,7 +423,13 @@ export default {
           ordersStore.loadOrders()
         ])
         
-        await initChart()
+        // Wait for data to be reactive
+        await nextTick()
+        
+        // Initialize chart after data is loaded
+        setTimeout(async () => {
+          await initChart()
+        }, 200)
         
         appStore.addNotification({
           type: 'success',
@@ -388,6 +437,7 @@ export default {
           message: 'Data dasbor telah diperbarui'
         })
       } catch (error) {
+        console.error('Refresh error:', error)
         appStore.addNotification({
           type: 'error',
           title: 'Perbarui Gagal',
@@ -413,23 +463,42 @@ export default {
     }
 
     onMounted(async () => {
+      console.log('Dashboard mounting...')
       appStore.setLoading(true)
       
       try {
+        // Load data first
         await loadAnalyticsData()
         await ordersStore.loadOrders()
         
         // Start real-time order simulation
         realtimeInterval.value = ordersStore.simulateRealtimeOrders()
         
-        // Initialize chart
-        await initChart()
+        // Wait for DOM to be fully ready
+        await nextTick()
+        
+        // Initialize chart with delay to ensure canvas is ready
+        setTimeout(async () => {
+          try {
+            await initChart()
+            console.log('Chart initialized successfully')
+          } catch (error) {
+            console.error('Chart initialization failed:', error)
+          }
+        }, 500)
         
         // Start system metrics simulation
         simulateSystemMetrics()
         
+        console.log('Dashboard mounted successfully')
+        
       } catch (error) {
         console.error('Dashboard initialization error:', error)
+        appStore.addNotification({
+          type: 'error',
+          title: 'Gagal Memuat',
+          message: 'Terjadi kesalahan saat memuat dashboard'
+        })
       } finally {
         appStore.setLoading(false)
       }

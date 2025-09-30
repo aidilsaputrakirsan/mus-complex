@@ -484,122 +484,111 @@ export default {
 
     const initRevenueChart = async () => {
       await nextTick()
-      if (!revenueChart.value || !analyticsData.value) return
+      await new Promise(resolve => setTimeout(resolve, 100))
+      
+      if (!revenueChart.value || !analyticsData.value?.monthlyRevenue) {
+        console.log('Revenue chart initialization skipped: missing elements or data')
+        return
+      }
 
-      const ctx = revenueChart.value.getContext('2d')
-      const data = analyticsData.value.monthlyRevenue
+      try {
+        const ctx = revenueChart.value.getContext('2d')
+        if (!ctx) {
+          console.error('Cannot get 2D context from revenue canvas')
+          return
+        }
+        
+        const data = analyticsData.value.monthlyRevenue
 
-      // Clear canvas
-      ctx.clearRect(0, 0, revenueChart.value.width, revenueChart.value.height)
+        // Clear canvas
+        ctx.clearRect(0, 0, revenueChart.value.width, revenueChart.value.height)
 
-      // Chart dimensions
-      const padding = 50
-      const chartWidth = revenueChart.value.width - 2 * padding
-      const chartHeight = revenueChart.value.height - 2 * padding
+        // Chart dimensions
+        const padding = 50
+        const chartWidth = revenueChart.value.width - 2 * padding
+        const chartHeight = revenueChart.value.height - 2 * padding
 
-      // Data processing
-      const maxRevenue = Math.max(...data.map(d => d.revenue))
-      const minRevenue = Math.min(...data.map(d => d.revenue))
-      const range = maxRevenue - minRevenue
+        // Data processing
+        const revenues = data.map(d => d.revenue)
+        const maxRevenue = Math.max(...revenues)
+        const minRevenue = Math.min(...revenues)
+        const range = maxRevenue - minRevenue || 1
 
-      // Draw grid
-      ctx.strokeStyle = '#e3e6f0'
-      ctx.lineWidth = 1
+        // Draw grid
+        ctx.strokeStyle = '#e3e6f0'
+        ctx.lineWidth = 1
 
-      // Horizontal grid lines
-      for (let i = 0; i <= 6; i++) {
-        const y = padding + (i * chartHeight / 6)
+        // Horizontal grid lines
+        for (let i = 0; i <= 6; i++) {
+          const y = padding + (i * chartHeight / 6)
+          ctx.beginPath()
+          ctx.moveTo(padding, y)
+          ctx.lineTo(padding + chartWidth, y)
+          ctx.stroke()
+
+          // Y-axis labels
+          const value = maxRevenue - (i * range / 6)
+          ctx.fillStyle = '#6c757d'
+          ctx.font = '12px Arial'
+          ctx.textAlign = 'right'
+          ctx.fillText(`${(value / 1000).toFixed(0)}K`, padding - 10, y + 4)
+        }
+
+        // Draw line chart
+        ctx.strokeStyle = '#667eea'
+        ctx.lineWidth = 3
         ctx.beginPath()
-        ctx.moveTo(padding, y)
-        ctx.lineTo(padding + chartWidth, y)
+
+        data.forEach((point, index) => {
+          const x = padding + (index * chartWidth / (data.length - 1))
+          const y = padding + chartHeight - ((point.revenue - minRevenue) / range) * chartHeight
+          
+          if (index === 0) {
+            ctx.moveTo(x, y)
+          } else {
+            ctx.lineTo(x, y)
+          }
+        })
+
         ctx.stroke()
 
-        // Y-axis labels
-        const value = maxRevenue - (i * range / 6)
+        // Draw points
+        ctx.fillStyle = '#667eea'
+        data.forEach((point, index) => {
+          const x = padding + (index * chartWidth / (data.length - 1))
+          const y = padding + chartHeight - ((point.revenue - minRevenue) / range) * chartHeight
+          
+          ctx.beginPath()
+          ctx.arc(x, y, 6, 0, Math.PI * 2)
+          ctx.fill()
+        })
+
+        // Draw labels
         ctx.fillStyle = '#6c757d'
         ctx.font = '12px Arial'
-        ctx.textAlign = 'right'
-        ctx.fillText(`$${(value / 1000).toFixed(0)}K`, padding - 10, y + 4)
-      }
+        ctx.textAlign = 'center'
 
-      // Vertical grid lines
-      for (let i = 0; i < data.length; i++) {
-        const x = padding + (i * chartWidth / (data.length - 1))
-        ctx.beginPath()
-        ctx.moveTo(x, padding)
-        ctx.lineTo(x, padding + chartHeight)
-        ctx.stroke()
-      }
-
-      // Draw gradient area
-      const gradient = ctx.createLinearGradient(0, padding, 0, padding + chartHeight)
-      gradient.addColorStop(0, 'rgba(102, 126, 234, 0.3)')
-      gradient.addColorStop(1, 'rgba(102, 126, 234, 0.05)')
-
-      ctx.fillStyle = gradient
-      ctx.beginPath()
-      ctx.moveTo(padding, padding + chartHeight)
-
-      data.forEach((point, index) => {
-        const x = padding + (index * chartWidth / (data.length - 1))
-        const y = padding + chartHeight - ((point.revenue - minRevenue) / range) * chartHeight
+        data.forEach((point, index) => {
+          const x = padding + (index * chartWidth / (data.length - 1))
+          ctx.fillText(point.month, x, revenueChart.value.height - 20)
+        })
         
-        if (index === 0) {
-          ctx.lineTo(x, y)
-        } else {
-          ctx.lineTo(x, y)
+        console.log('Revenue chart rendered successfully')
+        
+      } catch (error) {
+        console.error('Revenue chart rendering error:', error)
+        
+        // Fallback
+        if (revenueChart.value) {
+          const ctx = revenueChart.value.getContext('2d')
+          if (ctx) {
+            ctx.fillStyle = '#6c757d'
+            ctx.font = '16px Arial'
+            ctx.textAlign = 'center'
+            ctx.fillText('Grafik sedang dimuat...', revenueChart.value.width / 2, revenueChart.value.height / 2)
+          }
         }
-      })
-
-      ctx.lineTo(padding + chartWidth, padding + chartHeight)
-      ctx.closePath()
-      ctx.fill()
-
-      // Draw line chart
-      ctx.strokeStyle = '#667eea'
-      ctx.lineWidth = 3
-      ctx.beginPath()
-
-      data.forEach((point, index) => {
-        const x = padding + (index * chartWidth / (data.length - 1))
-        const y = padding + chartHeight - ((point.revenue - minRevenue) / range) * chartHeight
-        
-        if (index === 0) {
-          ctx.moveTo(x, y)
-        } else {
-          ctx.lineTo(x, y)
-        }
-      })
-
-      ctx.stroke()
-
-      // Draw points
-      ctx.fillStyle = '#667eea'
-      data.forEach((point, index) => {
-        const x = padding + (index * chartWidth / (data.length - 1))
-        const y = padding + chartHeight - ((point.revenue - minRevenue) / range) * chartHeight
-        
-        ctx.beginPath()
-        ctx.arc(x, y, 6, 0, Math.PI * 2)
-        ctx.fill()
-        
-        // White inner circle
-        ctx.beginPath()
-        ctx.fillStyle = 'white'
-        ctx.arc(x, y, 3, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.fillStyle = '#667eea'
-      })
-
-      // Draw labels
-      ctx.fillStyle = '#6c757d'
-      ctx.font = '12px Arial'
-      ctx.textAlign = 'center'
-
-      data.forEach((point, index) => {
-        const x = padding + (index * chartWidth / (data.length - 1))
-        ctx.fillText(point.month, x, revenueChart.value.height - 20)
-      })
+      }
     }
 
     const initTrafficChart = async () => {
@@ -641,24 +630,85 @@ export default {
       loading.value = true
       
       try {
-        const response = await fetch('/data/analytics.json')
+        // Try multiple paths for production compatibility
+        let response
+        try {
+          response = await fetch('/data/analytics.json')
+        } catch {
+          response = await fetch('./data/analytics.json')
+        }
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        
         analyticsData.value = await response.json()
         
-        await Promise.all([
-          initRevenueChart(),
-          initTrafficChart()
-        ])
+        // Wait for data to be reactive
+        await nextTick()
+        
+        // Initialize charts with delay
+        setTimeout(async () => {
+          await Promise.all([
+            initRevenueChart(),
+            initTrafficChart()
+          ])
+        }, 300)
         
         appStore.addNotification({
           type: 'success',
-          title: 'Data Refreshed',
-          message: 'Analytics data has been updated'
+          title: 'Data Diperbarui',
+          message: 'Data analitik telah diperbarui'
         })
       } catch (error) {
+        console.error('Analytics refresh error:', error)
+        
+        // Use fallback data
+        analyticsData.value = {
+          monthlyRevenue: [
+            {"month": "Jan", "revenue": 125000, "orders": 450},
+            {"month": "Feb", "revenue": 145000, "orders": 523},
+            {"month": "Mar", "revenue": 135000, "orders": 489},
+            {"month": "Apr", "revenue": 155000, "orders": 567},
+            {"month": "Mei", "revenue": 175000, "orders": 634},
+            {"month": "Jun", "revenue": 165000, "orders": 598},
+            {"month": "Jul", "revenue": 185000, "orders": 672},
+            {"month": "Agu", "revenue": 195000, "orders": 701},
+            {"month": "Sep", "revenue": 205000, "orders": 734},
+            {"month": "Okt", "revenue": 215000, "orders": 789},
+            {"month": "Nov", "revenue": 225000, "orders": 823},
+            {"month": "Des", "revenue": 245000, "orders": 876}
+          ],
+          categoryPerformance: [
+            {"category": "Elektronik", "revenue": 856000, "percentage": 45.2},
+            {"category": "Aksesoris", "revenue": 634000, "percentage": 33.5},
+            {"category": "Kantor", "revenue": 403000, "percentage": 21.3}
+          ],
+          topProducts: [
+            {"productId": 3, "name": "Kabel Charger USB-C", "sales": 892, "revenue": 17838.08},
+            {"productId": 2, "name": "Case Handphone Pintar", "sales": 567, "revenue": 14165.33},
+            {"productId": 6, "name": "Mouse Nirkabel", "sales": 456, "revenue": 15954.44}
+          ],
+          trafficSources: [
+            {"source": "Langsung", "visitors": 15640, "percentage": 42.3},
+            {"source": "Google", "visitors": 12890, "percentage": 34.9},
+            {"source": "Media Sosial", "visitors": 5430, "percentage": 14.7},
+            {"source": "Email", "visitors": 2980, "percentage": 8.1}
+          ]
+        }
+        
+        await nextTick()
+        setTimeout(async () => {
+          await Promise.all([
+            initRevenueChart(),
+            initTrafficChart()
+          ])
+        }, 300)
+        
         appStore.addNotification({
-          type: 'error',
-          title: 'Refresh Failed',
-          message: 'Failed to refresh analytics data'
+          type: 'warning',
+          title: 'Menggunakan Data Sampel',
+          message: 'Gagal memuat data, menggunakan data sampel'
         })
       } finally {
         loading.value = false
