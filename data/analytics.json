@@ -1,0 +1,71 @@
+{
+  "dailyStats": {
+    "revenue": 12450.75,
+    "orders": 47,
+    "customers": 23,
+    "products": 156
+  },
+  "monthlyRevenue": [
+    {"month": "Jan", "revenue": 125000, "orders": 450},
+    {"month": "Feb", "revenue": 145000, "orders": 523},
+    {"month": "Mar", "revenue": 135000, "orders": 489},
+    {"month": "Apr", "revenue": 155000, "orders": 567},
+    {"month": "May", "revenue": 175000, "orders": 634},
+    {"month": "Jun", "revenue": 165000, "orders": 598},
+    {"month": "Jul", "revenue": 185000, "orders": 672},
+    {"month": "Aug", "revenue": 195000, "orders": 701},
+    {"month": "Sep", "revenue": 205000, "orders": 734},
+    {"month": "Oct", "revenue": 215000, "orders": 789},
+    {"month": "Nov", "revenue": 225000, "orders": 823},
+    {"month": "Dec", "revenue": 245000, "orders": 876}
+  ],
+  "categoryPerformance": [
+    {"category": "Electronics", "revenue": 856000, "percentage": 45.2},
+    {"category": "Accessories", "revenue": 634000, "percentage": 33.5},
+    {"category": "Office", "revenue": 403000, "percentage": 21.3}
+  ],
+  "topProducts": [
+    {"productId": 3, "name": "USB-C Charging Cable", "sales": 892, "revenue": 17838.08},
+    {"productId": 2, "name": "Smart Phone Case", "sales": 567, "revenue": 14165.33},
+    {"productId": 6, "name": "Wireless Mouse", "sales": 456, "revenue": 15954.44},
+    {"productId": 4, "name": "Portable Power Bank", "sales": 345, "revenue": 17246.55},
+    {"productId": 7, "name": "Mechanical Keyboard", "sales": 267, "revenue": 42717.33}
+  ],
+  "customerSegments": [
+    {"segment": "New Customers", "count": 234, "percentage": 31.2},
+    {"segment": "Returning Customers", "count": 456, "percentage": 60.8},
+    {"segment": "VIP Customers", "count": 60, "percentage": 8.0}
+  ],
+  "trafficSources": [
+    {"source": "Direct", "visitors": 15640, "percentage": 42.3},
+    {"source": "Google", "visitors": 12890, "percentage": 34.9},
+    {"source": "Social Media", "visitors": 5430, "percentage": 14.7},
+    {"source": "Email", "visitors": 2980, "percentage": 8.1}
+  ],
+  "hourlyOrders": [
+    {"hour": "00:00", "orders": 5},
+    {"hour": "01:00", "orders": 3},
+    {"hour": "02:00", "orders": 2},
+    {"hour": "03:00", "orders": 1},
+    {"hour": "04:00", "orders": 2},
+    {"hour": "05:00", "orders": 4},
+    {"hour": "06:00", "orders": 8},
+    {"hour": "07:00", "orders": 12},
+    {"hour": "08:00", "orders": 18},
+    {"hour": "09:00", "orders": 25},
+    {"hour": "10:00", "orders": 32},
+    {"hour": "11:00", "orders": 28},
+    {"hour": "12:00", "orders": 35},
+    {"hour": "13:00", "orders": 30},
+    {"hour": "14:00", "orders": 38},
+    {"hour": "15:00", "orders": 42},
+    {"hour": "16:00", "orders": 45},
+    {"hour": "17:00", "orders": 40},
+    {"hour": "18:00", "orders": 35},
+    {"hour": "19:00", "orders": 28},
+    {"hour": "20:00", "orders": 22},
+    {"hour": "21:00", "orders": 18},
+    {"hour": "22:00", "orders": 12},
+    {"hour": "23:00", "orders": 8}
+  ]
+}

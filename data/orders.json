@@ -1,0 +1,94 @@
+{
+  "orders": [
+    {
+      "id": "ORD-001",
+      "customer": {
+        "name": "John Doe",
+        "email": "john.doe@email.com",
+        "phone": "+1234567890"
+      },
+      "items": [
+        {"productId": 1, "quantity": 2, "price": 129.99},
+        {"productId": 3, "quantity": 1, "price": 19.99}
+      ],
+      "total": 279.97,
+      "status": "delivered",
+      "paymentMethod": "Credit Card",
+      "shippingAddress": "123 Main St, City, State 12345",
+      "orderDate": "2024-01-15T10:30:00Z",
+      "deliveryDate": "2024-01-18T14:22:00Z"
+    },
+    {
+      "id": "ORD-002",
+      "customer": {
+        "name": "Jane Smith",
+        "email": "jane.smith@email.com",
+        "phone": "+1234567891"
+      },
+      "items": [
+        {"productId": 4, "quantity": 1, "price": 49.99},
+        {"productId": 6, "quantity": 1, "price": 34.99}
+      ],
+      "total": 84.98,
+      "status": "shipped",
+      "paymentMethod": "PayPal",
+      "shippingAddress": "456 Oak Ave, Town, State 54321",
+      "orderDate": "2024-01-16T09:15:00Z",
+      "deliveryDate": null
+    },
+    {
+      "id": "ORD-003",
+      "customer": {
+        "name": "Mike Johnson",
+        "email": "mike.johnson@email.com",
+        "phone": "+1234567892"
+      },
+      "items": [
+        {"productId": 7, "quantity": 1, "price": 159.99},
+        {"productId": 2, "quantity": 3, "price": 24.99}
+      ],
+      "total": 234.96,
+      "status": "processing",
+      "paymentMethod": "Credit Card",
+      "shippingAddress": "789 Pine St, Village, State 98765",
+      "orderDate": "2024-01-17T14:45:00Z",
+      "deliveryDate": null
+    },
+    {
+      "id": "ORD-004",
+      "customer": {
+        "name": "Sarah Wilson",
+        "email": "sarah.wilson@email.com",
+        "phone": "+1234567893"
+      },
+      "items": [
+        {"productId": 5, "quantity": 1, "price": 89.99},
+        {"productId": 8, "quantity": 2, "price": 29.99}
+      ],
+      "total": 149.97,
+      "status": "pending",
+      "paymentMethod": "Bank Transfer",
+      "shippingAddress": "321 Elm St, City, State 13579",
+      "orderDate": "2024-01-18T11:20:00Z",
+      "deliveryDate": null
+    },
+    {
+      "id": "ORD-005",
+      "customer": {
+        "name": "David Brown",
+        "email": "david.brown@email.com",
+        "phone": "+1234567894"
+      },
+      "items": [
+        {"productId": 9, "quantity": 1, "price": 79.99},
+        {"productId": 10, "quantity": 1, "price": 69.99}
+      ],
+      "total": 149.98,
+      "status": "cancelled",
+      "paymentMethod": "Credit Card",
+      "shippingAddress": "654 Maple Dr, Town, State 24680",
+      "orderDate": "2024-01-19T16:30:00Z",
+      "deliveryDate": null
+    }
+  ]
+}
