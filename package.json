@@ -1,7 +1,7 @@
 {
   "name": "vue-complex-performance-app",
   "version": "1.0.0",
-  "description": "Vue.js Complex App for Performance Testing - E-commerce Dashboard",
+  "description": "Aplikasi Vue.js Kompleks untuk Uji Performa - Dashboard E-commerce",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

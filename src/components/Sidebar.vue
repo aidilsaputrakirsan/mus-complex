@@ -3,7 +3,7 @@
     <div class="sidebar-header">
       <div class="logo">
         <span class="logo-icon">🛍️</span>
-        <span v-if="!appStore.sidebarCollapsed" class="logo-text">ShopAdmin Pro</span>
+        <span v-if="!appStore.sidebarCollapsed" class="logo-text">TokoAdmin Pro</span>
       </div>
     </div>
 
@@ -32,7 +32,7 @@
       <div class="user-info" v-if="!appStore.sidebarCollapsed">
         <div class="user-avatar">👤</div>
         <div class="user-details">
-          <div class="user-name">Admin User</div>
+          <div class="user-name">Pengguna Admin</div>
           <div class="user-role">Administrator</div>
         </div>
       </div>
@@ -54,44 +54,44 @@ export default {
       {
         name: 'Dashboard',
         path: '/dashboard',
-        label: 'Dashboard',
+        label: 'Dasbor',
         icon: '📊'
       },
       {
         name: 'Products',
         path: '/products',
-        label: 'Products',
+        label: 'Produk',
         icon: '📦'
       },
       {
         name: 'Orders',
         path: '/orders',
-        label: 'Orders',
+        label: 'Pesanan',
         icon: '🛒',
         badge: ordersStore.realtimeOrders.length || null
       },
       {
         name: 'Customers',
         path: '/customers',
-        label: 'Customers',
+        label: 'Pelanggan',
         icon: '👥'
       },
       {
         name: 'Analytics',
         path: '/analytics',
-        label: 'Analytics',
+        label: 'Analitik',
         icon: '📈'
       },
       {
         name: 'Inventory',
         path: '/inventory',
-        label: 'Inventory',
+        label: 'Inventori',
         icon: '📋'
       },
       {
         name: 'Settings',
         path: '/settings',
-        label: 'Settings',
+        label: 'Pengaturan',
         icon: '⚙️'
       }
     ])

@@ -2,18 +2,18 @@
   <div class="dashboard">
     <!-- Header -->
     <div class="dashboard-header">
-      <h1>Dashboard Overview</h1>
+      <h1>Ringkasan Dasbor</h1>
       <div class="header-actions">
         <button @click="refreshData" class="btn btn-primary" :disabled="loading">
           <span v-if="loading">🔄</span>
           <span v-else>↻</span>
-          Refresh
+          Perbarui
         </button>
         <select v-model="dateRange" @change="onDateRangeChange" class="date-selector">
-          <option value="today">Today</option>
-          <option value="week">This Week</option>
-          <option value="month">This Month</option>
-          <option value="year">This Year</option>
+          <option value="today">Hari Ini</option>
+          <option value="week">Minggu Ini</option>
+          <option value="month">Bulan Ini</option>
+          <option value="year">Tahun Ini</option>
         </select>
       </div>
     </div>
@@ -61,10 +61,10 @@
       <!-- Real-time Orders -->
       <div class="realtime-orders card">
         <div class="card-header">
-          <h3>Real-time Orders</h3>
+          <h3>Pesanan Real-time</h3>
           <div class="status-indicator">
             <span class="status-dot live"></span>
-            Live
+            Langsung
           </div>
         </div>
         <div class="orders-list">
@@ -84,7 +84,7 @@
             <div class="order-time">{{ formatRelativeTime(order.timestamp) }}</div>
           </div>
           <div v-if="!realtimeOrders.length" class="no-orders">
-            Waiting for new orders...
+            Menunggu pesanan baru...
           </div>
         </div>
       </div>
@@ -92,7 +92,7 @@
       <!-- Top Products -->
       <div class="top-products card">
         <div class="card-header">
-          <h3>Top Selling Products</h3>
+          <h3>Produk Terlaris</h3>
         </div>
         <div class="products-list">
           <div 
@@ -113,7 +113,7 @@
       <!-- Activity Feed -->
       <div class="activity-feed card">
         <div class="card-header">
-          <h3>Recent Activity</h3>
+          <h3>Aktivitas Terbaru</h3>
         </div>
         <div class="activity-list">
           <div 
@@ -135,7 +135,7 @@
       <!-- Performance Metrics -->
       <div class="performance-metrics card">
         <div class="card-header">
-          <h3>System Performance</h3>
+          <h3>Performa Sistem</h3>
         </div>
         <div class="metrics-grid">
           <div class="metric-item">
@@ -178,7 +178,7 @@ export default {
     const loading = ref(false)
     const dateRange = ref('month')
     const selectedChartPeriod = ref('Month')
-    const chartPeriods = ['Week', 'Month', 'Quarter', 'Year']
+    const chartPeriods = ['Minggu', 'Bulan', 'Kuartal', 'Tahun']
     const revenueChart = ref(null)
     
     const analyticsData = ref(null)
@@ -191,28 +191,28 @@ export default {
 
     const dashboardStats = computed(() => [
       {
-        label: 'Total Revenue',
+        label: 'Total Pendapatan',
         value: analyticsData.value?.dailyStats.revenue || 0,
         icon: '💰',
         color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         change: 12.5
       },
       {
-        label: 'Orders Today',
+        label: 'Pesanan Hari Ini',
         value: analyticsData.value?.dailyStats.orders || 0,
         icon: '📦',
         color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
         change: 8.2
       },
       {
-        label: 'New Customers',
+        label: 'Pelanggan Baru',
         value: analyticsData.value?.dailyStats.customers || 0,
         icon: '👥',
         color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
         change: -2.4
       },
       {
-        label: 'Products',
+        label: 'Produk',
         value: analyticsData.value?.dailyStats.products || 0,
         icon: '🏷️',
         color: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
@@ -233,28 +233,28 @@ export default {
         id: 1,
         type: 'order',
         icon: '🛒',
-        text: 'New order #ORD-1234 received',
+        text: 'Pesanan baru #PES-1234 diterima',
         timestamp: new Date(Date.now() - 2 * 60 * 1000)
       },
       {
         id: 2,
         type: 'product',
         icon: '📦',
-        text: 'Product "Wireless Headphones" updated',
+        text: 'Produk "Headphone Nirkabel" diperbarui',
         timestamp: new Date(Date.now() - 15 * 60 * 1000)
       },
       {
         id: 3,
         type: 'customer',
         icon: '👤',
-        text: 'New customer registration',
+        text: 'Pelanggan baru terdaftar',
         timestamp: new Date(Date.now() - 30 * 60 * 1000)
       },
       {
         id: 4,
         type: 'system',
         icon: '⚙️',
-        text: 'System backup completed',
+        text: 'Backup sistem selesai',
         timestamp: new Date(Date.now() - 45 * 60 * 1000)
       }
     ])
@@ -384,14 +384,14 @@ export default {
         
         appStore.addNotification({
           type: 'success',
-          title: 'Data Refreshed',
-          message: 'Dashboard data has been updated'
+          title: 'Data Diperbarui',
+          message: 'Data dasbor telah diperbarui'
         })
       } catch (error) {
         appStore.addNotification({
           type: 'error',
-          title: 'Refresh Failed',
-          message: 'Failed to refresh dashboard data'
+          title: 'Perbarui Gagal',
+          message: 'Gagal memperbarui data dasbor'
         })
       } finally {
         loading.value = false

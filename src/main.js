@@ -21,43 +21,43 @@ const routes = [
     path: '/dashboard', 
     component: Dashboard, 
     name: 'Dashboard',
-    meta: { title: 'Dashboard' }
+    meta: { title: 'Dasbor' }
   },
   { 
     path: '/products', 
     component: Products, 
     name: 'Products',
-    meta: { title: 'Products Management' }
+    meta: { title: 'Manajemen Produk' }
   },
   { 
     path: '/orders', 
     component: Orders, 
     name: 'Orders',
-    meta: { title: 'Orders Management' }
+    meta: { title: 'Manajemen Pesanan' }
   },
   { 
     path: '/customers', 
     component: Customers, 
     name: 'Customers',
-    meta: { title: 'Customer Database' }
+    meta: { title: 'Database Pelanggan' }
   },
   { 
     path: '/analytics', 
     component: Analytics, 
     name: 'Analytics',
-    meta: { title: 'Analytics & Reports' }
+    meta: { title: 'Analitik & Laporan' }
   },
   { 
     path: '/inventory', 
     component: Inventory, 
     name: 'Inventory',
-    meta: { title: 'Inventory Management' }
+    meta: { title: 'Manajemen Inventori' }
   },
   { 
     path: '/settings', 
     component: Settings, 
     name: 'Settings',
-    meta: { title: 'System Settings' }
+    meta: { title: 'Pengaturan Sistem' }
   }
 ]
 
@@ -72,7 +72,7 @@ router.beforeEach((to, from, next) => {
   const startTime = performance.now()
   
   // Update document title
-  document.title = to.meta.title ? `${to.meta.title} - ShopAdmin Pro` : 'ShopAdmin Pro'
+  document.title = to.meta.title ? `${to.meta.title} - TokoAdmin Pro` : 'TokoAdmin Pro'
   
   // Store navigation timing
   sessionStorage.setItem('lastNavigationTime', startTime.toString())

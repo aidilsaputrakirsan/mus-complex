@@ -10,36 +10,36 @@
     {"month": "Feb", "revenue": 145000, "orders": 523},
     {"month": "Mar", "revenue": 135000, "orders": 489},
     {"month": "Apr", "revenue": 155000, "orders": 567},
-    {"month": "May", "revenue": 175000, "orders": 634},
+    {"month": "Mei", "revenue": 175000, "orders": 634},
     {"month": "Jun", "revenue": 165000, "orders": 598},
     {"month": "Jul", "revenue": 185000, "orders": 672},
-    {"month": "Aug", "revenue": 195000, "orders": 701},
+    {"month": "Agu", "revenue": 195000, "orders": 701},
     {"month": "Sep", "revenue": 205000, "orders": 734},
-    {"month": "Oct", "revenue": 215000, "orders": 789},
+    {"month": "Okt", "revenue": 215000, "orders": 789},
     {"month": "Nov", "revenue": 225000, "orders": 823},
-    {"month": "Dec", "revenue": 245000, "orders": 876}
+    {"month": "Des", "revenue": 245000, "orders": 876}
   ],
   "categoryPerformance": [
-    {"category": "Electronics", "revenue": 856000, "percentage": 45.2},
-    {"category": "Accessories", "revenue": 634000, "percentage": 33.5},
-    {"category": "Office", "revenue": 403000, "percentage": 21.3}
+    {"category": "Elektronik", "revenue": 856000, "percentage": 45.2},
+    {"category": "Aksesoris", "revenue": 634000, "percentage": 33.5},
+    {"category": "Kantor", "revenue": 403000, "percentage": 21.3}
   ],
   "topProducts": [
-    {"productId": 3, "name": "USB-C Charging Cable", "sales": 892, "revenue": 17838.08},
-    {"productId": 2, "name": "Smart Phone Case", "sales": 567, "revenue": 14165.33},
-    {"productId": 6, "name": "Wireless Mouse", "sales": 456, "revenue": 15954.44},
-    {"productId": 4, "name": "Portable Power Bank", "sales": 345, "revenue": 17246.55},
-    {"productId": 7, "name": "Mechanical Keyboard", "sales": 267, "revenue": 42717.33}
+    {"productId": 3, "name": "Kabel Charger USB-C", "sales": 892, "revenue": 17838.08},
+    {"productId": 2, "name": "Case Handphone Pintar", "sales": 567, "revenue": 14165.33},
+    {"productId": 6, "name": "Mouse Nirkabel", "sales": 456, "revenue": 15954.44},
+    {"productId": 4, "name": "Power Bank Portabel", "sales": 345, "revenue": 17246.55},
+    {"productId": 7, "name": "Keyboard Mekanik", "sales": 267, "revenue": 42717.33}
   ],
   "customerSegments": [
-    {"segment": "New Customers", "count": 234, "percentage": 31.2},
-    {"segment": "Returning Customers", "count": 456, "percentage": 60.8},
-    {"segment": "VIP Customers", "count": 60, "percentage": 8.0}
+    {"segment": "Pelanggan Baru", "count": 234, "percentage": 31.2},
+    {"segment": "Pelanggan Kembali", "count": 456, "percentage": 60.8},
+    {"segment": "Pelanggan VIP", "count": 60, "percentage": 8.0}
   ],
   "trafficSources": [
-    {"source": "Direct", "visitors": 15640, "percentage": 42.3},
+    {"source": "Langsung", "visitors": 15640, "percentage": 42.3},
     {"source": "Google", "visitors": 12890, "percentage": 34.9},
-    {"source": "Social Media", "visitors": 5430, "percentage": 14.7},
+    {"source": "Media Sosial", "visitors": 5430, "percentage": 14.7},
     {"source": "Email", "visitors": 2980, "percentage": 8.1}
   ],
   "hourlyOrders": [

@@ -17,7 +17,7 @@
       <div class="search-box">
         <input 
           type="text" 
-          placeholder="Search products, orders, customers..." 
+          placeholder="Cari produk, pesanan, pelanggan..." 
           v-model="searchQuery"
           @input="onSearch"
           class="search-input"
@@ -44,8 +44,8 @@
         
         <div v-if="showNotifications" class="notification-panel">
           <div class="notification-header">
-            <h4>Notifications</h4>
-            <button @click="clearAllNotifications" class="clear-btn">Clear All</button>
+            <h4>Notifikasi</h4>
+            <button @click="clearAllNotifications" class="clear-btn">Bersihkan Semua</button>
           </div>
           <div class="notification-list">
             <div 
@@ -67,7 +67,7 @@
               </button>
             </div>
             <div v-if="!appStore.notifications.length" class="no-notifications">
-              No new notifications
+              Tidak ada notifikasi baru
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@
       <button 
         class="theme-toggle"
         @click="appStore.toggleTheme"
-        :title="appStore.theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'"
+        :title="appStore.theme === 'light' ? 'Beralih ke Mode Gelap' : 'Beralih ke Mode Terang'"
       >
         <span v-if="appStore.theme === 'light'">🌙</span>
         <span v-else>☀️</span>
@@ -92,10 +92,10 @@
         </button>
         
         <div v-if="showUserMenu" class="user-dropdown">
-          <a href="#" class="dropdown-item">Profile</a>
-          <a href="#" class="dropdown-item">Settings</a>
+          <a href="#" class="dropdown-item">Profil</a>
+          <a href="#" class="dropdown-item">Pengaturan</a>
           <hr class="dropdown-divider">
-          <a href="#" class="dropdown-item">Logout</a>
+          <a href="#" class="dropdown-item">Keluar</a>
         </div>
       </div>
     </div>
@@ -219,8 +219,8 @@ export default {
       setTimeout(() => {
         appStore.addNotification({
           type: 'info',
-          title: 'New Order',
-          message: 'Order #ORD-123 has been placed'
+          title: 'Pesanan Baru',
+          message: 'Pesanan #PES-123 telah diterima'
         })
       }, 2000)
     })
