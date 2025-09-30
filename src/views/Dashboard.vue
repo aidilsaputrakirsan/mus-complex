@@ -336,7 +336,7 @@ export default {
         appStore.addNotification({
           type: 'warning',
           title: 'Menggunakan Data Sampel',
-          message: 'Menggunakan data sampel untuk demo'
+          message: 'Menggunakan data sampel'
         })
       }
     }

@@ -708,7 +708,7 @@ export default {
         appStore.addNotification({
           type: 'warning',
           title: 'Menggunakan Data Sampel',
-          message: 'Gagal memuat data, menggunakan data sampel'
+          message: 'menggunakan data sampel'
         })
       } finally {
         loading.value = false
