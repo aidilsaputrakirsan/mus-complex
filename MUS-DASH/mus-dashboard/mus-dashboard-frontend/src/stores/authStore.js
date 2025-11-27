@@ -10,6 +10,10 @@ export const useAuthStore = defineStore("auth", {
     lastError: "",
   }),
 
+  getters: {
+    isAuthenticated: (state) => !!state.token,
+  },
+
   actions: {
     async login(username, password) {
       this.loading = true;
